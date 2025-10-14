@@ -284,3 +284,50 @@ export default tseslint.config([
 ```
 
 ---
+
+### Instalação e configuração do Shadcn-UI + Tailwind
+
+1 - Instale o TailwindCSS:
+
+[Shadcn Guide](https://ui.shadcn.com/docs/installation/vite)
+
+```sh
+pnpm add tailwindcss @tailwindcss/vite
+```
+
+2 - Edite o **tsconfig.json** e adicione:
+
+```json
+/* depois do colchete do "references"]*/
+,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+```
+
+3 - Instale os Types:
+
+```sh
+pnpm add -D @types/node
+```
+
+4 - Atualize o **vite.config.ts**, adicionando:
+
+```js
+// adicione
+import path from 'node:path'
+import tailwindcss from '@tailwindcss/vite'
+
+// em plugins adicione
+/* plugins: [react(), */ tailwindcss() /* ] */ ,
+
+// depois de plugins, adicione
+resolve: {
+	alias: {
+		'@': path.resolve(__dirname, './src'),
+	},
+},
+```
